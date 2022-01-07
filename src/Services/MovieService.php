@@ -1,10 +1,13 @@
 <?php
+namespace App\Services;
 
 use App\Entity\Movie;
 use App\Repository\MovieRepository;
+use App\Services\IMovieService;
+use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 
-class MovieService implements IMovieService
+class MovieService
 {
     private EntityManagerInterface $entityManager;
     private MovieRepository $movieRepository;
@@ -50,7 +53,8 @@ class MovieService implements IMovieService
 
     public function GetLastAddedMovies(): array
     {
-        $date = new \DateTime('now');
-        return $this->movieRepository->findBy(["created_at" => $date]);
+        $date = new \DateTimeImmutable('today');
+        $date->format('Y-m-d');
+        return $this->movieRepository->findBy(["CreatedAt" => $date]);
     }
 }

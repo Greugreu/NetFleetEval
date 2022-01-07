@@ -1,9 +1,7 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Netfleet{% endblock %}
-
 {% block body %}
-    <h2>Liste des films</h2>
+    <h2>Les films ajoutés aujourd'hui</h2>
     <ul>
     {% for movie in movies %}
         <li>{{ movie.Name }}</li>

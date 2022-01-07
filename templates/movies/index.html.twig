@@ -1,17 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Netfleet{% endblock %}
-
 {% block body %}
     <h1>NetFleet</h1>
-    <h2>Comme la page d'accueil mais avec 201</h2>
-    <h2>Les films ajoutés aujourd'hui</h2>
-    <ul>
-        {% for last in lastAdded %}
-            <li>{{ last.Name }}</li>
-        {% endfor %}
-    </ul>
-    <h2>Liste des films</h2>
+
+    <h2>Tous les Films</h2>
     <ul>
         {% for movie in movies %}
             <li>{{ movie.Name }}</li>

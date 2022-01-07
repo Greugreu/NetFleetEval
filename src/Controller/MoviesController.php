@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use MovieService;
+use App\Services\MovieService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -25,6 +25,7 @@ class MoviesController extends AbstractController
             'controller_name' => 'MoviesController',
         ]);
     }
+
     /**
      * @Route("/AddMovie", name="Add Movie")
      */
@@ -36,10 +37,13 @@ class MoviesController extends AbstractController
         } else {
             return new JsonResponse("Le JSON est vide gros", Response::HTTP_BAD_REQUEST);
         }
+
         $lastAdded = $this->movieService->GetLastAddedMovies();
         return $this->render('movies/index.html.twig', [
             'controller_name' => 'MoviesController',
             'lastAdded' => $lastAdded
         ]);
     }
+
+
 }

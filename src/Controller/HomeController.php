@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Repository\MovieRepository;
+use App\Services\MovieService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -10,10 +11,12 @@ use Symfony\Component\Routing\Annotation\Route;
 class HomeController extends AbstractController
 {
     private MovieRepository $movieRepository;
+    private MovieService $movieService;
 
-    public function __construct(MovieRepository $movieRepository)
+    public function __construct(MovieRepository $movieRepository, MovieService $movieService)
     {
         $this->movieRepository = $movieRepository;
+        $this->movieService = $movieService;
     }
 
     /**
@@ -21,7 +24,7 @@ class HomeController extends AbstractController
      */
     public function index(): Response
     {
-        $movies = $this->movieRepository->findAll();
+        $movies = $this->movieService->GetLastAddedMovies();
 
         return $this->render('home/index.html.twig', [
             'controller_name' => 'HomeController',
