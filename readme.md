@@ -2,10 +2,10 @@
 
 > Evaluation Symfony
 
-## Technical Requirements
-In order to be able to run the application on your workstation, you must install the following dependencies:
+## Requis Techniques
+Pour faire tourner le projet:
 * Symfony 
-* PHP 8.1 or higher
+* PHP 8.1 ou plus
 * Composer
 * Postgresql
 
