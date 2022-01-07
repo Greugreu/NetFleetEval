@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Repository\MovieRepository;
 use App\Services\MovieService;
+use App\Services\SerializerService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -12,9 +14,14 @@ use Symfony\Component\Routing\Annotation\Route;
 class MoviesController extends AbstractController
 {
     private MovieService $movieService;
-    public function __construct(MovieService $movieService)
+    private MovieRepository $movieRepository;
+    private SerializerService $serializerService;
+
+    public function __construct(MovieService $movieService, MovieRepository $movieRepository, SerializerService $serializerService)
     {
         $this->movieService = $movieService;
+        $this->movieRepository = $movieRepository;
+        $this->serializerService = $serializerService;
     }
     /**
      * @Route("/movies", name="movies")
@@ -45,5 +52,13 @@ class MoviesController extends AbstractController
         ]);
     }
 
-
+    /**
+     * @Route("/GetAllMovies", name"Get all movies")
+     */
+    public function GetAllMovies(): JsonResponse
+    {
+        $movies = $this->movieRepository->findAll();
+        $json = $this->serializerService->SimpleSerializer($movies, 'json');
+        return JsonResponse::fromJsonString($json);
+    }
 }
