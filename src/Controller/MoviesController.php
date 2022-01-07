@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Repository\MovieRepository;
 use App\Services\MovieService;
 use App\Services\SerializerService;
+use PHPUnit\Util\Json;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -68,7 +69,14 @@ class MoviesController extends AbstractController
     public function GetMovieById($id): JsonResponse
     {
         $movie = $this->movieService->GetSingleMovieById($id);
-        $json = $this->serializerService->SimpleSerializer($movie, 'json');
-        return JsonResponse::fromJsonString($json);
+        if (!empty($movie))
+        {
+            $json = $this->serializerService->SimpleSerializer($movie, 'json');
+            return JsonResponse::fromJsonString($json);
+        }
+        else
+        {
+            return new JsonResponse("Not Found", Response::HTTP_NOT_FOUND);
+        }
     }
 }
