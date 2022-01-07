@@ -14,11 +14,6 @@ class MovieService implements IMovieService
         $this->movieRepository = $movieRepository;
     }
 
-    public function GetAllMovies()
-    {
-
-    }
-
     public function InsertMovieToDb()
     {
 
