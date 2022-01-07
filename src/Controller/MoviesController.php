@@ -53,12 +53,22 @@ class MoviesController extends AbstractController
     }
 
     /**
-     * @Route("/GetAllMovies", name"Get all movies")
+     * @Route("/movies/all", name="Get all movies")
      */
     public function GetAllMovies(): JsonResponse
     {
         $movies = $this->movieRepository->findAll();
         $json = $this->serializerService->SimpleSerializer($movies, 'json');
+        return JsonResponse::fromJsonString($json);
+    }
+
+    /**
+     * @Route("/movies/{id}", name="getId")
+     */
+    public function GetMovieById($id): JsonResponse
+    {
+        $movie = $this->movieService->GetSingleMovieById($id);
+        $json = $this->serializerService->SimpleSerializer($movie, 'json');
         return JsonResponse::fromJsonString($json);
     }
 }
