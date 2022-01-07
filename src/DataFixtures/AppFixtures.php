@@ -30,6 +30,7 @@ class AppFixtures extends Fixture
 
             $this->entityManager->persist($movie);
         }
+
         $this->entityManager->flush();
     }
 }
